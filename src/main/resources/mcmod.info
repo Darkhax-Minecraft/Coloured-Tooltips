@@ -1,0 +1,23 @@
+[  
+   {  
+      "modid":"colouredtooltips",
+      "name":"Coloured Tooltips",
+      "description":"Allows tooltip colour to be configured.",
+      "version":"${version}",
+      "mcversion":"${mcversion}",
+      "url":"https://minecraft.curseforge.com/projects/coloured-tooltips",
+      "updateUrl":"",
+      "authorList":[  
+         "Darkhax"
+      ],
+      "credits":"",
+      "logoFile":"",
+      "screenshots":[  
+
+      ],
+      "parent":"",
+      "dependencies":[  
+
+      ]
+   }
+]
