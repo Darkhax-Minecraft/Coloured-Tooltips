@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = "colouredtooltips", name = "Coloured Tooltips", version = "@VERSION@", certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = "colouredtooltips", name = "Coloured Tooltips", version = "@VERSION@", clientSideOnly = true, certificateFingerprint = "@FINGERPRINT@")
 public class ColouredTooltips {
 
     public static Logger LOG = LogManager.getLogger("Coloured Tooltips");
@@ -30,13 +30,13 @@ public class ColouredTooltips {
 
         LOG.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been tampered with. This version will NOT be supported by the author!");
     }
-    
+
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onTooltipColour (RenderTooltipEvent.Color event) {
 
         // Check to see if tooltip colour was modified at all. If it has, we wont touch it.
         if (event.getOriginalBackground() == event.getBackground() && event.getOriginalBorderEnd() == event.getBorderEnd() && event.getOriginalBorderStart() == event.getBorderStart()) {
-            
+
             event.setBorderStart((int) ConfigurationHandler.start);
             event.setBorderEnd((int) ConfigurationHandler.end);
             event.setBackground((int) ConfigurationHandler.background);
