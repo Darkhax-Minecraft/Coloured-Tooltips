@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = "colouredtooltips", name = "Coloured Tooltips", version = "@VERSION@", clientSideOnly = true, certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = "colouredtooltips", name = "Coloured Tooltips", version = "@VERSION@", dependencies = "required-after:forge@[14.23.1.2598,)", clientSideOnly = true, certificateFingerprint = "@FINGERPRINT@")
 public class ColouredTooltips {
 
     public static Logger LOG = LogManager.getLogger("Coloured Tooltips");
