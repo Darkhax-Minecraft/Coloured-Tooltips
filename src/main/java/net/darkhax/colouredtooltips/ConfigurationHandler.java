@@ -1,55 +1,72 @@
 package net.darkhax.colouredtooltips;
 
-import java.awt.Color;
-import java.io.File;
-
-import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
 public class ConfigurationHandler {
 
-    public static Configuration config;
-
+    private final ForgeConfigSpec spec;
+    
     // #505000ff (80, 0, 255, 80)
-    public static long start;
-
+    private final ConfigValue<String> borderStart;
+    
     // #5028007f (40, 0, 127, 80)
-    public static long end;
-
+    private final ConfigValue<String> borderEnd;
+    
     // #f0100010 (16, 0, 16, 240)
-    public static long background;
+    private final ConfigValue<String> background;
+    
+    public ConfigurationHandler () {
 
-    public ConfigurationHandler (File file) {
+        final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
-        config = new Configuration(file);
-        config.setCategoryComment(Configuration.CATEGORY_GENERAL, "Color values are ARGB hex. Do not add a # to the codes. If you want opaque RGB use FF for first two chars.");
-        this.syncConfigData();
+        // General Configs
+        builder.comment("General settings for the mod.");
+        builder.push("general");
+
+        builder.comment("The color at the top of the tooltip gradient.");
+        borderStart = builder.define("borderStart", "505000ff");
+        
+        builder.comment("The color at the bottom of the tooltip gradient.");
+        borderEnd = builder.define("borderEnd", "5028007f");
+        
+        builder.comment("The color for the background of the tooltip.");
+        background = builder.define("background", "f0100010");
+        
+        this.spec = builder.build();
     }
-
-    private void syncConfigData () {
-
-        start = this.getColor("borderStart", "505000ff", "top");
-        end = this.getColor("borderEnd", "5028007f", "bottom");
-        background = this.getColor("background", "f0100010", "background");
-
-        if (config.hasChanged()) {
-            config.save();
-        }
+    
+    public ForgeConfigSpec getSpec() {
+    	
+    	return this.spec;
     }
-
-    public long getColor (String name, String defaultValue, String explain) {
-
-        final String colorValue = "0x" + config.getString(name, Configuration.CATEGORY_GENERAL, defaultValue, "The color for the " + explain + " of the tooltip. This should be 8 characters.");
-
-        try {
-
-            return Long.decode(colorValue);
-        }
-
-        catch (final Exception e) {
-
-            ColouredTooltips.LOG.trace("Could not read color for " + name + ". Invalid color: " + colorValue + " Default: " + defaultValue, e);
-        }
-
-        return Color.WHITE.getRGB();
+    
+    public int getStartColor() {
+    	
+    	return (int) getColor(this.borderStart);
+    }
+    
+    public int getEndColor() {
+    	
+    	return (int) getColor(this.borderEnd);
+    }
+    
+    public int getBackgroundColor() {
+    	
+    	return (int) getColor(this.background);
+    }
+    
+    private long getColor(ConfigValue<String> stringValue) {
+    	
+    	try {
+    		
+    		return Long.decode("0x" + stringValue.get());
+    	}
+    	
+    	catch (NumberFormatException e) {
+    		
+    		ColouredTooltips.LOG.error("The color value in the configuration file is not valid. The color white will be used instead. This is something the pack dev needs to fix.", e);
+    		return 0xffffffff;
+    	}
     }
 }
