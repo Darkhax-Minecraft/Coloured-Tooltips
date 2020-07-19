@@ -4,6 +4,7 @@ issueTrackerURL="https://github.com/Darkhax-Minecraft/Coloured-Tooltips/issues"
 
 [[mods]]
 modId="colouredtooltips"
+updateJSONURL="https://updates.blamejared.com/get?n=colouredtooltips&gv=1.15.2"
 version="${version}"
 displayName="${mod_name}"
 displayURL="${mod_download}"
