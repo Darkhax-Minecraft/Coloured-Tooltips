@@ -7,10 +7,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 @Mod("colouredtooltips")
 public class ColouredTooltips {
@@ -20,11 +20,11 @@ public class ColouredTooltips {
 
     public ColouredTooltips() {
     	
-    	DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+    	if (FMLEnvironment.dist == Dist.CLIENT) {
     		
         	ModLoadingContext.get().registerConfig(Type.CLIENT, config.getSpec());
     		MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, this::onTooltipColour);
-    	});
+    	}
     }
 
     private void onTooltipColour (RenderTooltipEvent.Color event) {
