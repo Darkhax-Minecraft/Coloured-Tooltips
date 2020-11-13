@@ -24,7 +24,6 @@ apply from: 'https://raw.githubusercontent.com/MinecraftModDevelopment/Gradle-Co
 apply from: 'https://raw.githubusercontent.com/MinecraftModDevelopment/Gradle-Collection/master/minecraft/maven_nomcp.gradle'
 apply from: 'https://raw.githubusercontent.com/MinecraftModDevelopment/Gradle-Collection/master/generic/patreon.gradle'
 
-import net.minecraftforge.gradle.common.task.SignJar
 import groovy.json.JsonSlurper
 import groovy.json.JsonOutput
 
@@ -178,33 +177,6 @@ curseforge {
         addArtifact(deobfJar)
     }
 }
-
-task signJar(type: SignJar, dependsOn: jar) {
-
-    onlyIf {
-    
-        project.hasProperty('keyStore')
-    }
-    
-	if (project.hasProperty('keyStore')) {
-	
-	    project.logger.lifecycle('Signing jar ' + jar.archivePath.getName());
-	
-        keyStore = project.findProperty('keyStore')
-        alias = project.findProperty('keyStoreAlias')
-        storePass = project.findProperty('keyStorePass')
-        keyPass = project.findProperty('keyStoreKeyPass')
-        inputFile = jar.archivePath
-        outputFile = jar.archivePath
-	}
-	
-	else {
-	
-	    project.logger.lifecycle('Could not sign ' + jar.archivePath.getName() + '. No keyStore property could be found')
-	}
-}
-
-//build.dependsOn signJar
 
 tasks.getByName("curseforge").doLast {
     
