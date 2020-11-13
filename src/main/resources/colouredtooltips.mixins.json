@@ -1,0 +1,10 @@
+{
+	"required": true,
+	"package": "net.darkhax.colouredtooltips.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"refmap": "colouredtooltips.refmap.json",
+	"mixins": [
+	    "MixinScreen"
+	],
+	"minVersion": "0.8"
+}
