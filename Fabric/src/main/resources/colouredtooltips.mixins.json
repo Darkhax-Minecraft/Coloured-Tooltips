@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "net.darkhax.colouredtooltips.mixin",
+    "compatibilityLevel": "JAVA_16",
+    "mixins": [
+      "MixinScreen"
+    ],
+    "injectors": {
+      "defaultRequire": 1
+    }
+  }
+  
