@@ -12,7 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.fmllegacy.network.FMLNetworkConstants;
+import net.minecraftforge.network.NetworkConstants;
 
 @Mod(Constants.MOD_ID)
 public class ColouredTooltipsForge {
@@ -21,7 +21,7 @@ public class ColouredTooltipsForge {
 
     public ColouredTooltipsForge() {
 
-        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
 
@@ -39,7 +39,7 @@ public class ColouredTooltipsForge {
 
         if (this.config != null) {
 
-            final ItemStack stack = event.getStack();
+            final ItemStack stack = event.getItemStack();
             ConfigSchema.ColorOptions displayColor = this.config.defaultColors;
 
             if (stack != null && !stack.isEmpty()) {

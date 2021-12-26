@@ -46,7 +46,6 @@ public class MixinScreen {
     @ModifyConstant(method = "renderTooltipInternal", constant = @Constant(intValue = -267386864))
     private int modifyBackgroundColor( int original) {
 
-        System.out.println(this.color.toString());
         return this.color.background.getDecimal();
     }
 
